@@ -64,31 +64,33 @@ export default function ExportAll({ svgString, palette, businessCardCanvas, soci
   if (!isReady) return null;
 
   return (
-    <div className="mt-8">
+    <div>
       <button
         onClick={handleExportAll}
         disabled={isExporting}
-        className={`w-full py-4 px-8 rounded-xl font-bold text-lg transition-all duration-300
+        className={`px-6 py-3 rounded-xl font-bold text-[13px] uppercase tracking-wider transition-all duration-300 shadow-lg flex items-center gap-3
           ${isExporting
-            ? 'bg-gray-700 text-gray-400 cursor-not-allowed'
-            : 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white hover:from-emerald-500 hover:to-teal-500 hover:shadow-lg hover:shadow-emerald-500/25 active:scale-[0.98] cursor-pointer'
+            ? 'bg-slate-800 text-slate-500 cursor-not-allowed border border-slate-700'
+            : 'bg-emerald-600 hover:bg-emerald-500 text-white shadow-emerald-500/20 active:scale-[0.98] cursor-pointer'
           }`}
       >
         {isExporting ? (
-          <span className="flex items-center justify-center gap-3">
-            <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+          <>
+            <svg className="animate-spin h-4 w-4 opacity-70" viewBox="0 0 24 24">
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"/>
               <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/>
             </svg>
             Creating ZIP...
-          </span>
+          </>
         ) : (
-          '📦 Download All Assets (ZIP)'
+          <>
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+            Download All Assets
+          </>
         )}
       </button>
-      <p className="text-xs text-gray-500 text-center mt-2">
-        Includes: logo.svg, logo.png, color-palette.json, business-card.png, social-template.png
-      </p>
     </div>
   );
 }

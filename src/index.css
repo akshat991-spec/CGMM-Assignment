@@ -1,26 +1,23 @@
 /**
  * index.css — Global Styles & Tailwind CSS v4 Import
- * 
- * This file serves as the entry point for all styling.
- * Tailwind CSS v4 uses a CSS-first configuration approach —
- * no separate tailwind.config.js is needed.
  */
 
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
-/* ===== CUSTOM THEME TOKENS ===== */
 @theme {
-  /* Extended color palette for the dark UI */
-  --color-gray-950: #0A0A0F;
-  --color-gray-900: #111118;
-  --color-gray-800: #1A1A25;
+  /* Premium Dark Theme Palette */
+  --color-slate-950: #020617;
+  --color-slate-900: #0f172a;
+  --color-slate-800: #1e293b;
   
-  /* Animation durations */
-  --animate-fade-in: fade-in 0.5s ease-out;
-  --animate-slide-up: slide-up 0.5s ease-out;
+  --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+  
+  --animate-fade-in: fade-in 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-slide-up: slide-up 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-slide-in-right: slide-in-right 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* ===== CUSTOM ANIMATIONS ===== */
 @keyframes fade-in {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -29,11 +26,22 @@
 @keyframes slide-up {
   from { 
     opacity: 0; 
-    transform: translateY(20px); 
+    transform: translateY(30px); 
   }
   to { 
     opacity: 1; 
     transform: translateY(0); 
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 
@@ -44,63 +52,88 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background-color: #0A0A0F;
-  color: #FFFFFF;
+  font-family: var(--font-sans);
+  background-color: #020617;
+  color: #f8fafc;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 /* ===== SCROLLBAR STYLING ===== */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #111118;
+  background: #020617;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #333;
-  border-radius: 4px;
+  background: #1e293b;
+  border-radius: 5px;
+  border: 2px solid #020617;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #444;
+  background: #334155;
 }
 
-/* ===== SELECT DROPDOWN STYLING ===== */
+/* ===== FORM ELEMENTS ===== */
 select option {
-  background-color: #111118;
-  color: #FFFFFF;
-  padding: 8px;
+  background-color: #0f172a;
+  color: #f8fafc;
 }
 
-/* ===== COLOR INPUT STYLING ===== */
+/* ===== COLOR INPUT HACKS ===== */
 input[type="color"] {
   -webkit-appearance: none;
   border: none;
   padding: 0;
+  background: transparent;
 }
 
 input[type="color"]::-webkit-color-swatch-wrapper {
-  padding: 4px;
+  padding: 0;
 }
 
 input[type="color"]::-webkit-color-swatch {
   border: none;
-  border-radius: 8px;
+  border-radius: 0;
 }
 
-/* ===== CANVAS RENDERING ===== */
+/* ===== UTILITIES ===== */
 canvas {
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
 }
 
-/* ===== SMOOTH SECTION TRANSITIONS ===== */
-section, .space-y-6 > * {
-  animation: slide-up 0.4s ease-out;
+.glass-panel {
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
+
+.glass-card {
+  background: linear-gradient(145deg, rgba(30,41,59,0.4) 0%, rgba(15,23,42,0.6) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 1px 1px rgba(255,255,255,0.05), 0 8px 32px rgba(0,0,0,0.3);
+}
+
+/* ===== ANIMATION CLASSES ===== */
+.animate-on-mount {
+  animation: slide-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.stagger-1 { animation-delay: 100ms; }
+.stagger-2 { animation-delay: 200ms; }
+.stagger-3 { animation-delay: 300ms; }
+.stagger-4 { animation-delay: 400ms; }
+.stagger-5 { animation-delay: 500ms; }

@@ -47,51 +47,59 @@ export default function LogoPreview({ svgString, logoMeta }) {
   if (!svgString) return null;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 animate-on-mount stagger-1">
       {/* Section Header */}
-      <div className="flex items-center gap-3">
-        <div className="w-8 h-8 rounded-lg bg-blue-500/20 flex items-center justify-center text-blue-400 text-sm">
+      <div className="flex items-center gap-3 px-2">
+        <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 border border-blue-500/30 flex items-center justify-center text-blue-400 text-sm shadow-[0_0_10px_rgba(59,130,246,0.1)]">
           🎨
         </div>
-        <h2 className="text-xl font-bold text-white">Logo</h2>
+        <h2 className="text-xl font-bold text-slate-100 tracking-tight">Logo Design</h2>
       </div>
 
       {/* Logo Display */}
-      <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 flex flex-col items-center">
+      <div className="glass-card rounded-3xl p-8 flex flex-col items-center relative overflow-hidden group">
+        
+        {/* Subtle background glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-blue-500/10 blur-3xl rounded-full pointer-events-none transition-opacity opacity-0 group-hover:opacity-100 duration-500"></div>
+
         {/* SVG Container — white background for logo visibility */}
         <div 
           ref={svgContainerRef}
-          className="bg-white rounded-xl p-8 shadow-lg mb-6 w-64 h-64 flex items-center justify-center"
+          className="bg-white rounded-2xl p-8 shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-slate-200 mb-6 w-64 h-64 flex items-center justify-center relative z-10 transition-transform duration-500 hover:scale-[1.02]"
           dangerouslySetInnerHTML={{ __html: svgString }}
         />
 
         {/* Logo Metadata */}
         {logoMeta && (
-          <div className="text-center mb-4 space-y-1">
-            <p className="text-xs text-gray-500 uppercase tracking-wider">
-              Icon: <span className="text-gray-300">{logoMeta.iconName}</span> • 
-              Style: <span className="text-gray-300">{logoMeta.styleTreatment}</span>
+          <div className="text-center mb-6 space-y-1 relative z-10">
+            <p className="text-[11px] font-semibold text-slate-500 uppercase tracking-widest">
+              Icon: <span className="text-slate-300">{logoMeta.iconName}</span> <span className="mx-1 text-slate-600">•</span> 
+              Style: <span className="text-slate-300">{logoMeta.styleTreatment}</span>
             </p>
           </div>
         )}
 
         {/* Export Buttons */}
-        <div className="flex gap-3">
+        <div className="flex gap-3 relative z-10 w-full sm:w-auto">
           <button
             onClick={handleDownloadSvg}
-            className="px-5 py-2.5 bg-white/10 hover:bg-white/15 border border-white/10 rounded-lg 
-              text-sm font-medium text-white transition-all duration-200 cursor-pointer
-              hover:border-white/20"
+            className="flex-1 sm:flex-none px-6 py-3 bg-slate-800/80 hover:bg-slate-700 border border-slate-700/50 rounded-xl 
+              text-[13px] font-semibold text-white transition-all duration-200 cursor-pointer hover:shadow-lg flex items-center justify-center gap-2"
           >
-            ⬇ SVG
+            <svg className="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+            Vector (SVG)
           </button>
           <button
             onClick={handleDownloadPng}
-            className="px-5 py-2.5 bg-white/10 hover:bg-white/15 border border-white/10 rounded-lg 
-              text-sm font-medium text-white transition-all duration-200 cursor-pointer
-              hover:border-white/20"
+            className="flex-1 sm:flex-none px-6 py-3 bg-slate-800/80 hover:bg-slate-700 border border-slate-700/50 rounded-xl 
+              text-[13px] font-semibold text-white transition-all duration-200 cursor-pointer hover:shadow-lg flex items-center justify-center gap-2"
           >
-            ⬇ PNG
+            <svg className="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+            Image (PNG)
           </button>
         </div>
       </div>

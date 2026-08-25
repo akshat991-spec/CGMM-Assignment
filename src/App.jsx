@@ -117,125 +117,130 @@ export default function App() {
   }, [generateBrandKit]);
 
   return (
-    <div className="min-h-screen bg-gray-950 text-white">
+    <div className="min-h-screen bg-slate-950 text-slate-100 overflow-x-hidden relative font-sans selection:bg-blue-500/30">
+      
+      {/* ===== AMBIENT BACKGROUND GLOW ===== */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] opacity-20 pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-teal-500 blur-[120px] rounded-full mix-blend-screen" />
+      </div>
+
       {/* ===== HEADER ===== */}
-      <header className="border-b border-white/5 bg-gray-950/80 backdrop-blur-xl sticky top-0 z-50">
+      <header className="sticky top-0 z-50 border-b border-white/5 bg-slate-950/60 backdrop-blur-xl">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-blue-500/20">
+          <div className="flex items-center gap-4">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white font-extrabold text-xl shadow-[0_0_20px_rgba(59,130,246,0.3)] border border-blue-400/20">
               B
             </div>
             <div>
-              <h1 className="text-lg font-bold tracking-tight">BrandForge AI</h1>
-              <p className="text-xs text-gray-500">AI-Based Logo & Brand Identity Generator</p>
+              <h1 className="text-xl font-bold tracking-tight text-white">BrandForge AI</h1>
+              <p className="text-[11px] font-medium text-slate-400 tracking-widest uppercase">Identity Generator</p>
             </div>
           </div>
           {brandKit && (
-            <button
-              onClick={handleRegenerate}
-              disabled={isGenerating}
-              className="px-5 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl 
-                text-sm font-medium text-white transition-all duration-200 flex items-center gap-2 cursor-pointer
-                hover:border-white/20 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              <svg className={`w-4 h-4 ${isGenerating ? 'animate-spin' : ''}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M1 4v6h6M23 20v-6h-6" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              Regenerate
-            </button>
+            <div className="flex items-center gap-3">
+              <button
+                onClick={() => { setBrandKit(null); setVariationSeed(0); }}
+                className="px-4 py-2 text-sm font-medium text-slate-400 hover:text-white transition-colors cursor-pointer"
+              >
+                Start Over
+              </button>
+              <button
+                onClick={handleRegenerate}
+                disabled={isGenerating}
+                className="px-5 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl 
+                  text-sm font-medium text-white transition-all duration-200 flex items-center gap-2 cursor-pointer
+                  hover:border-white/20 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
+              >
+                <svg className={`w-4 h-4 ${isGenerating ? 'animate-spin' : ''}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M1 4v6h6M23 20v-6h-6" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                Variation #{variationSeed + 1}
+              </button>
+            </div>
           )}
         </div>
       </header>
 
       {/* ===== MAIN CONTENT ===== */}
-      <main className="max-w-7xl mx-auto px-6 py-8">
+      <main className="max-w-7xl mx-auto px-6 py-12 relative z-10">
         {!brandKit ? (
           /* ===== HERO + INPUT STATE ===== */
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center animate-on-mount">
             {/* Hero Section */}
-            <div className="text-center mb-12 max-w-2xl">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-400 text-sm font-medium mb-6">
-                <span className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></span>
-                Computer Graphics & Multimedia Project
+            <div className="text-center mb-14 max-w-3xl">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-400 text-xs font-semibold uppercase tracking-widest mb-8 shadow-inner">
+                <span className="w-1.5 h-1.5 bg-blue-400 rounded-full animate-pulse shadow-[0_0_8px_rgba(96,165,250,0.8)]"></span>
+                v2.0 Architecture
               </div>
-              <h2 className="text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent leading-tight">
-                Generate Your Complete Brand Identity
+              <h2 className="text-5xl sm:text-6xl font-extrabold mb-6 text-white tracking-tight leading-[1.1]">
+                Design your brand <br/>
+                <span className="bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">in seconds.</span>
               </h2>
-              <p className="text-lg text-gray-400 leading-relaxed">
-                Enter your business details below and our rule-based AI engine will generate
-                a complete brand kit — logo, color palette, typography, business card, and social media template.
+              <p className="text-lg text-slate-400 leading-relaxed max-w-2xl mx-auto font-medium">
+                Our deterministic engine crafts a cohesive identity—including logos, typography, and assets—perfectly tailored to your industry and style.
               </p>
             </div>
 
             {/* Input Form Card */}
-            <div className="w-full max-w-xl">
-              <div className="bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-2xl shadow-black/20">
+            <div className="w-full max-w-xl mx-auto relative group">
+              <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-purple-600 rounded-[2rem] blur opacity-20 group-hover:opacity-30 transition duration-1000 group-hover:duration-200"></div>
+              <div className="relative glass-card rounded-3xl p-8 sm:p-10">
                 <InputForm onGenerate={handleGenerate} isGenerating={isGenerating} />
               </div>
             </div>
 
             {/* Feature highlights */}
-            <div className="grid grid-cols-5 gap-4 mt-16 max-w-4xl w-full">
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mt-20 max-w-5xl w-full">
               {[
-                { icon: '🎨', label: 'SVG Logo', desc: 'Scalable vector' },
-                { icon: '🎭', label: 'Color Palette', desc: '5-color harmony' },
-                { icon: '🔤', label: 'Typography', desc: 'Font pairing' },
-                { icon: '💳', label: 'Business Card', desc: 'Print-ready' },
-                { icon: '📱', label: 'Social Post', desc: '1080×1080' },
-              ].map(f => (
-                <div key={f.label} className="text-center p-4 rounded-xl bg-white/[0.02] border border-white/5">
-                  <div className="text-2xl mb-2">{f.icon}</div>
-                  <div className="text-sm font-semibold text-gray-300">{f.label}</div>
-                  <div className="text-xs text-gray-500">{f.desc}</div>
+                { icon: '🎨', label: 'Vector Logos', desc: 'Scalable SVG' },
+                { icon: '🎭', label: 'Color Theory', desc: 'Harmonious palettes' },
+                { icon: '🔤', label: 'Typography', desc: 'Premium font pairs' },
+                { icon: '💳', label: 'Print Assets', desc: 'Business cards' },
+                { icon: '📱', label: 'Social Ready', desc: '1080×1080 posts' },
+              ].map((f, i) => (
+                <div key={f.label} className={`text-center p-5 rounded-2xl glass-panel animate-on-mount stagger-${i + 1}`}>
+                  <div className="text-3xl mb-3 drop-shadow-md">{f.icon}</div>
+                  <div className="text-sm font-bold text-slate-200 mb-1">{f.label}</div>
+                  <div className="text-xs font-medium text-slate-500">{f.desc}</div>
                 </div>
               ))}
             </div>
           </div>
         ) : (
           /* ===== GENERATED OUTPUT STATE ===== */
-          <div>
+          <div className="animate-fade-in">
             {/* Generation Summary Bar */}
-            <div className="flex items-center justify-between mb-8 p-4 bg-white/[0.03] border border-white/10 rounded-xl">
+            <div className="flex flex-wrap items-center justify-between gap-4 mb-10 p-5 glass-panel rounded-2xl">
               <div className="flex items-center gap-4">
-                <div className="px-3 py-1.5 bg-green-500/10 border border-green-500/20 rounded-lg text-green-400 text-sm font-medium">
-                  ✓ Generated
-                </div>
-                <div>
-                  <span className="text-white font-semibold">{brandKit.inputs.businessName}</span>
-                  <span className="text-gray-500 mx-2">•</span>
-                  <span className="text-gray-400 text-sm">{brandKit.inputs.industry}</span>
-                  <span className="text-gray-500 mx-2">•</span>
-                  <span className="text-gray-400 text-sm">{brandKit.inputs.style}</span>
-                </div>
-              </div>
-              <div className="flex items-center gap-3">
-                <button
-                  onClick={() => { setBrandKit(null); setVariationSeed(0); }}
-                  className="px-4 py-2 text-sm text-gray-400 hover:text-white transition-colors cursor-pointer"
-                >
-                  ← New Brand
-                </button>
-                <button
-                  onClick={handleRegenerate}
-                  disabled={isGenerating}
-                  className="px-4 py-2 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg 
-                    text-sm font-medium text-white transition-all duration-200 cursor-pointer
-                    disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
-                >
-                  <svg className={`w-3.5 h-3.5 ${isGenerating ? 'animate-spin' : ''}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M1 4v6h6M23 20v-6h-6" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15" strokeLinecap="round" strokeLinejoin="round"/>
+                <div className="px-4 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-xl text-emerald-400 text-sm font-bold flex items-center gap-2 shadow-[0_0_15px_rgba(16,185,129,0.1)]">
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                   </svg>
-                  Variation #{variationSeed + 1}
-                </button>
+                  Generated Successfully
+                </div>
+                <div className="hidden sm:flex items-center text-sm font-medium">
+                  <span className="text-white bg-white/5 px-3 py-1 rounded-lg border border-white/10">{brandKit.inputs.businessName}</span>
+                  <span className="text-slate-600 mx-3">/</span>
+                  <span className="text-slate-400">{brandKit.inputs.industry}</span>
+                  <span className="text-slate-600 mx-3">/</span>
+                  <span className="text-slate-400">{brandKit.inputs.style}</span>
+                </div>
               </div>
+              
+              <ExportAll
+                svgString={brandKit.logo.svgString}
+                palette={brandKit.palette}
+                businessCardCanvas={businessCardCanvasRef.current}
+                socialTemplateCanvas={socialTemplateCanvasRef.current}
+                businessName={brandKit.inputs.businessName}
+              />
             </div>
 
             {/* Output Sections Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {/* Left Column: Logo + Colors + Typography */}
-              <div className="space-y-8">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+              {/* Left Column: Logo + Colors + Typography (Takes up 5 columns on large screens) */}
+              <div className="lg:col-span-5 space-y-8 flex flex-col">
                 <LogoPreview 
                   svgString={brandKit.logo.svgString} 
                   logoMeta={brandKit.logo}
@@ -247,8 +252,8 @@ export default function App() {
                 />
               </div>
 
-              {/* Right Column: Business Card + Social Template */}
-              <div className="space-y-8">
+              {/* Right Column: Business Card + Social Template (Takes up 7 columns) */}
+              <div className="lg:col-span-7 space-y-8 flex flex-col">
                 <BusinessCard
                   businessName={brandKit.inputs.businessName}
                   palette={brandKit.palette}
@@ -267,24 +272,20 @@ export default function App() {
                 />
               </div>
             </div>
-
-            {/* Export All Button */}
-            <ExportAll
-              svgString={brandKit.logo.svgString}
-              palette={brandKit.palette}
-              businessCardCanvas={businessCardCanvasRef.current}
-              socialTemplateCanvas={socialTemplateCanvasRef.current}
-              businessName={brandKit.inputs.businessName}
-            />
           </div>
         )}
       </main>
 
       {/* ===== FOOTER ===== */}
-      <footer className="border-t border-white/5 mt-16">
-        <div className="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between text-sm text-gray-600">
-          <p>AI-Based Logo & Brand Identity Generator — Computer Graphics & Multimedia Project</p>
-          <p>Built with React + Tailwind CSS + HTML5 Canvas</p>
+      <footer className="border-t border-white/5 mt-20 bg-slate-950/50 backdrop-blur-md">
+        <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm font-medium text-slate-500">
+          <p className="flex items-center gap-2">
+            BrandForge AI <span className="w-1 h-1 rounded-full bg-slate-700"></span> 2026
+          </p>
+          <p className="flex items-center gap-2">
+            Built with React & Tailwind
+            <svg className="w-4 h-4 text-blue-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          </p>
         </div>
       </footer>
     </div>
