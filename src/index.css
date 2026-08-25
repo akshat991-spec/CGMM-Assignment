@@ -1,0 +1,106 @@
+/**
+ * index.css — Global Styles & Tailwind CSS v4 Import
+ * 
+ * This file serves as the entry point for all styling.
+ * Tailwind CSS v4 uses a CSS-first configuration approach —
+ * no separate tailwind.config.js is needed.
+ */
+
+@import "tailwindcss";
+
+/* ===== CUSTOM THEME TOKENS ===== */
+@theme {
+  /* Extended color palette for the dark UI */
+  --color-gray-950: #0A0A0F;
+  --color-gray-900: #111118;
+  --color-gray-800: #1A1A25;
+  
+  /* Animation durations */
+  --animate-fade-in: fade-in 0.5s ease-out;
+  --animate-slide-up: slide-up 0.5s ease-out;
+}
+
+/* ===== CUSTOM ANIMATIONS ===== */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-up {
+  from { 
+    opacity: 0; 
+    transform: translateY(20px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+/* ===== BASE STYLES ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: #0A0A0F;
+  color: #FFFFFF;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== SCROLLBAR STYLING ===== */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #111118;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #444;
+}
+
+/* ===== SELECT DROPDOWN STYLING ===== */
+select option {
+  background-color: #111118;
+  color: #FFFFFF;
+  padding: 8px;
+}
+
+/* ===== COLOR INPUT STYLING ===== */
+input[type="color"] {
+  -webkit-appearance: none;
+  border: none;
+  padding: 0;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 4px;
+}
+
+input[type="color"]::-webkit-color-swatch {
+  border: none;
+  border-radius: 8px;
+}
+
+/* ===== CANVAS RENDERING ===== */
+canvas {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+/* ===== SMOOTH SECTION TRANSITIONS ===== */
+section, .space-y-6 > * {
+  animation: slide-up 0.4s ease-out;
+}
