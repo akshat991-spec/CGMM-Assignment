@@ -72,133 +72,138 @@ export default function InputForm({ onGenerate, isGenerating }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-8">
-      {/* Business Name Input */}
-      <div className="flex flex-col gap-2">
-        <label htmlFor="businessName" className="text-sm font-medium text-slate-400 ml-1">
-          Business Name
-        </label>
-        <div className="relative">
-          <input
-            id="businessName"
-            type="text"
-            value={businessName}
-            onChange={(e) => setBusinessName(e.target.value)}
-            placeholder="e.g., NovaTech, Bloom Café"
-            className="w-full px-4 py-3.5 bg-slate-900/40 border border-slate-700/50 rounded-xl text-slate-100 placeholder-slate-500 
-              focus:outline-none focus:bg-slate-900/80 focus:border-blue-500/50 focus:ring-4 focus:ring-blue-500/10 
-              transition-all duration-200 text-base shadow-inner"
-            required
-            maxLength={30}
-          />
+    <form onSubmit={handleSubmit} className="flex flex-col gap-10">
+      
+      {/* Business Name & Industry Row (Responsive) */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        {/* Business Name */}
+        <div className="flex flex-col gap-2.5">
+          <label htmlFor="businessName" className="text-[13px] font-bold text-slate-300 uppercase tracking-widest pl-1">
+            Business Name
+          </label>
+          <div className="relative group">
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl blur opacity-0 group-focus-within:opacity-30 transition duration-500"></div>
+            <input
+              id="businessName"
+              type="text"
+              value={businessName}
+              onChange={(e) => setBusinessName(e.target.value)}
+              placeholder="e.g. NovaTech"
+              className="relative w-full px-5 py-4 bg-slate-900/80 border border-slate-700/60 rounded-2xl text-slate-100 placeholder-slate-600 
+                focus:outline-none focus:border-blue-500/80 transition-all duration-300 text-lg font-medium shadow-inner"
+              required
+              maxLength={30}
+            />
+          </div>
         </div>
-      </div>
 
-      {/* Industry Dropdown */}
-      <div className="flex flex-col gap-2">
-        <label htmlFor="industry" className="text-sm font-medium text-slate-400 ml-1">
-          Industry
-        </label>
-        <div className="relative">
-          <select
-            id="industry"
-            value={industry}
-            onChange={(e) => setIndustry(e.target.value)}
-            className="w-full px-4 py-3.5 bg-slate-900/40 border border-slate-700/50 rounded-xl text-slate-100 
-              focus:outline-none focus:bg-slate-900/80 focus:border-blue-500/50 focus:ring-4 focus:ring-blue-500/10 
-              transition-all duration-200 text-base appearance-none cursor-pointer shadow-inner"
-            style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748B'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 16px center', backgroundSize: '20px' }}
-          >
-            {INDUSTRIES.map(ind => (
-              <option key={ind.value} value={ind.value} className="bg-slate-800 text-slate-200">{ind.label}</option>
-            ))}
-          </select>
+        {/* Industry */}
+        <div className="flex flex-col gap-2.5">
+          <label htmlFor="industry" className="text-[13px] font-bold text-slate-300 uppercase tracking-widest pl-1">
+            Industry
+          </label>
+          <div className="relative group">
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl blur opacity-0 group-focus-within:opacity-30 transition duration-500"></div>
+            <select
+              id="industry"
+              value={industry}
+              onChange={(e) => setIndustry(e.target.value)}
+              className="relative w-full px-5 py-4 bg-slate-900/80 border border-slate-700/60 rounded-2xl text-slate-100 
+                focus:outline-none focus:border-blue-500/80 transition-all duration-300 text-lg font-medium appearance-none cursor-pointer shadow-inner"
+              style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2394A3B8'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 20px center', backgroundSize: '24px' }}
+            >
+              {INDUSTRIES.map(ind => (
+                <option key={ind.value} value={ind.value} className="bg-slate-900 text-slate-100 font-medium py-2">{ind.label}</option>
+              ))}
+            </select>
+          </div>
         </div>
       </div>
 
       {/* Style Selection */}
-      <div className="flex flex-col gap-3">
-        <label className="text-sm font-medium text-slate-400 ml-1">
-          Design Style
-        </label>
-        <div className="grid grid-cols-2 gap-3">
+      <div className="flex flex-col gap-3.5">
+        <div className="flex items-center justify-between pl-1">
+          <label className="text-[13px] font-bold text-slate-300 uppercase tracking-widest">
+            Aesthetic Style
+          </label>
+          <span className="text-[11px] font-medium text-slate-500">Select the vibe of your brand</span>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
           {STYLES.map(s => (
             <button
               key={s.value}
               type="button"
               onClick={() => setStyle(s.value)}
-              className={`relative flex flex-col gap-1 p-4 rounded-xl border text-left transition-all duration-200 cursor-pointer overflow-hidden
+              className={`relative flex flex-col p-4 rounded-2xl border text-left transition-all duration-300 cursor-pointer overflow-hidden group
                 ${style === s.value
-                  ? 'border-blue-500/60 bg-blue-500/10 shadow-[0_0_15px_rgba(59,130,246,0.1)] ring-1 ring-blue-500/30'
-                  : 'border-slate-700/50 bg-slate-900/40 hover:border-slate-600 hover:bg-slate-800/50'
+                  ? 'border-blue-500 bg-blue-500/10 shadow-[0_0_20px_rgba(59,130,246,0.15)]'
+                  : 'border-slate-700/50 bg-slate-800/30 hover:border-slate-500 hover:bg-slate-800/60'
                 }`}
             >
-              {/* Active Indicator Dot */}
-              {style === s.value && (
-                <div className="absolute top-4 right-4 w-2 h-2 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.8)]" />
-              )}
-              <div className={`font-medium text-base ${style === s.value ? 'text-blue-400' : 'text-slate-200'}`}>
-                {s.label}
+              <div className="flex items-center justify-between mb-1.5">
+                <div className={`font-bold text-[15px] ${style === s.value ? 'text-blue-400' : 'text-slate-200 group-hover:text-white'}`}>
+                  {s.label}
+                </div>
+                {/* Active Indicator */}
+                <div className={`w-3 h-3 rounded-full transition-colors duration-300 ${style === s.value ? 'bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.8)]' : 'bg-slate-700'}`} />
               </div>
-              <div className="text-[13px] leading-snug text-slate-500 pr-4">{s.desc}</div>
+              <div className="text-[12px] leading-relaxed text-slate-400">{s.desc}</div>
             </button>
           ))}
         </div>
       </div>
 
-      {/* Color Picker */}
-      <div className="flex flex-col gap-3">
-        <label className="text-sm font-medium text-slate-400 ml-1">
-          Brand Color
+      {/* Color Selection */}
+      <div className="flex flex-col gap-4">
+        <label className="text-[13px] font-bold text-slate-300 uppercase tracking-widest pl-1">
+          Brand Color Signature
         </label>
         
-        {/* Color swatches */}
-        <div className="flex flex-wrap gap-2.5">
-          {COLOR_PRESETS.map(preset => (
-            <button
-              key={preset}
-              type="button"
-              onClick={() => setColor(preset)}
-              className={`w-8 h-8 rounded-full transition-all duration-200 cursor-pointer shadow-sm
-                ${color === preset 
-                  ? 'ring-2 ring-white ring-offset-2 ring-offset-slate-900 scale-110' 
-                  : 'hover:scale-110 ring-1 ring-white/10 ring-inset'
-                }`}
-              style={{ backgroundColor: preset }}
-              title={preset}
-            />
-          ))}
-        </div>
-        
-        {/* Custom color picker */}
-        <div className="flex items-center gap-3 mt-1">
-          <div className="relative group overflow-hidden rounded-xl border border-slate-700/50 shadow-inner w-12 h-12 flex-shrink-0 cursor-pointer transition-all hover:border-slate-500">
-             {/* Styled wrapper for the ugly native color input */}
-             <div 
-               className="absolute inset-0 pointer-events-none" 
-               style={{ backgroundColor: color }} 
-             />
-             <input
-               id="colorPicker"
-               type="color"
-               value={color}
-               onChange={(e) => setColor(e.target.value)}
-               className="opacity-0 absolute inset-[-10px] w-20 h-20 cursor-pointer"
-             />
+        <div className="flex flex-wrap items-center gap-3 bg-slate-800/30 p-4 rounded-2xl border border-slate-700/50">
+          <div className="flex flex-wrap gap-2.5 flex-1">
+            {COLOR_PRESETS.map(preset => (
+              <button
+                key={preset}
+                type="button"
+                onClick={() => setColor(preset)}
+                className={`w-9 h-9 rounded-full transition-all duration-300 cursor-pointer shadow-sm relative
+                  ${color === preset 
+                    ? 'scale-110 ring-2 ring-white ring-offset-2 ring-offset-slate-900 z-10' 
+                    : 'hover:scale-110 hover:z-10 ring-1 ring-white/10 ring-inset opacity-80 hover:opacity-100'
+                  }`}
+                style={{ backgroundColor: preset }}
+                title={preset}
+              />
+            ))}
           </div>
-          <div className="relative flex-1">
-            <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 font-mono">#</div>
-            <input
-              type="text"
-              value={color.replace('#', '').toUpperCase()}
-              onChange={(e) => {
-                const val = e.target.value;
-                if (/^[0-9A-Fa-f]{0,6}$/.test(val)) setColor('#' + val);
-              }}
-              className="w-full pl-8 pr-4 py-3 bg-slate-900/40 border border-slate-700/50 rounded-xl text-slate-100 font-mono text-sm
-                focus:outline-none focus:bg-slate-900/80 focus:border-blue-500/50 focus:ring-4 focus:ring-blue-500/10 transition-all shadow-inner uppercase"
-              placeholder="3B82F6"
-            />
+          
+          {/* Custom Hex Input */}
+          <div className="h-10 w-[1px] bg-slate-700/50 mx-2 hidden sm:block"></div>
+          <div className="flex items-center gap-2">
+            <div className="relative overflow-hidden rounded-xl w-9 h-9 flex-shrink-0 cursor-pointer ring-1 ring-white/10 shadow-inner group">
+               <div className="absolute inset-0 transition-transform group-hover:scale-110" style={{ backgroundColor: color }} />
+               <input
+                 type="color"
+                 value={color}
+                 onChange={(e) => setColor(e.target.value)}
+                 className="opacity-0 absolute inset-[-10px] w-20 h-20 cursor-pointer"
+               />
+            </div>
+            <div className="relative w-28">
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 font-mono text-sm">#</span>
+              <input
+                type="text"
+                value={color.replace('#', '').toUpperCase()}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  if (/^[0-9A-Fa-f]{0,6}$/.test(val)) setColor('#' + val);
+                }}
+                className="w-full pl-7 pr-3 py-2 bg-slate-900/60 border border-slate-600 rounded-lg text-slate-200 font-mono text-sm
+                  focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all uppercase"
+                placeholder="3B82F6"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -207,26 +212,31 @@ export default function InputForm({ onGenerate, isGenerating }) {
       <button
         type="submit"
         disabled={!businessName.trim() || isGenerating}
-        className={`w-full py-4 px-8 mt-2 rounded-xl font-semibold text-[15px] tracking-wide transition-all duration-300 flex items-center justify-center gap-3
+        className={`relative w-full py-5 rounded-2xl font-bold text-[16px] tracking-wide transition-all duration-300 flex items-center justify-center gap-3 mt-4 overflow-hidden group
           ${!businessName.trim() || isGenerating
-            ? 'bg-slate-800 text-slate-500 border border-slate-700 cursor-not-allowed'
-            : 'bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-500/20 active:scale-[0.98] cursor-pointer'
+            ? 'bg-slate-800/80 text-slate-500 cursor-not-allowed border border-slate-700'
+            : 'bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white shadow-[0_8px_30px_rgba(79,70,229,0.3)] active:scale-[0.98] cursor-pointer border border-white/10'
           }`}
       >
+        {/* Button hover glow */}
+        {(!(!businessName.trim() || isGenerating)) && (
+          <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out pointer-events-none"></div>
+        )}
+
         {isGenerating ? (
           <>
-            <svg className="animate-spin h-5 w-5 opacity-70" viewBox="0 0 24 24">
+            <svg className="animate-spin h-5 w-5 text-white/70" viewBox="0 0 24 24">
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"/>
               <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/>
             </svg>
-            Generating Identity...
+            <span className="relative z-10">Crafting Your Identity...</span>
           </>
         ) : (
           <>
-            <svg className="w-5 h-5 opacity-90" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            <span className="relative z-10">Generate Brand Identity</span>
+            <svg className="w-5 h-5 relative z-10 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>
-            Generate Brand Identity
           </>
         )}
       </button>
