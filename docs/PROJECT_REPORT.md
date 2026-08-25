@@ -12,7 +12,8 @@
 | **Course** | Computer Graphics & Multimedia |
 | **Project Type** | Web Application |
 | **Technology Stack** | React 18, Vite, Tailwind CSS v4, HTML5 Canvas, SVG |
-| **Repository** | GitHub (submitted separately) |
+| **Live Demo URL** | [https://cgmm.vercel.app](https://cgmm.vercel.app) |
+| **Repository** | [https://github.com/akshat991-spec/CGMM-Assignment](https://github.com/akshat991-spec/CGMM-Assignment) |
 
 ---
 

@@ -2,10 +2,13 @@
 
 > **Computer Graphics & Multimedia Project** — A rule-based brand identity generation system that creates complete visual identity kits from minimal user inputs.
 
-![Built with React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-06B6D4?logo=tailwindcss&logoColor=white)
-![Canvas API](https://img.shields.io/badge/HTML5-Canvas-E34F26?logo=html5&logoColor=white)
-![SVG](https://img.shields.io/badge/SVG-Graphics-FFB13B?logo=svg&logoColor=black)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-cgmm.vercel.app-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://cgmm.vercel.app)
+![Built with React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
+![Canvas API](https://img.shields.io/badge/HTML5-Canvas-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![SVG](https://img.shields.io/badge/SVG-Graphics-FFB13B?style=for-the-badge&logo=svg&logoColor=black)
+
+🌐 **Live Website**: [https://cgmm.vercel.app](https://cgmm.vercel.app)
 
 ---
 
